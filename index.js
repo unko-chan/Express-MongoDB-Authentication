@@ -69,7 +69,7 @@ app.get("/members", (req, res) => {
 
   const blocks = ["Dirt.png", "Grass_Block.png", "Stone.png"];
   const randomBlock = blocks[Math.floor(Math.random() * blocks.length)];
-  res.send(`<h1>Members page</h1>
+  res.send(`<h1>Hello, ${req.session.username}</h1>
   <img src='/${randomBlock}' style='width:250px;'>
   <br><a href="/logout">Logout</a>`);
 });

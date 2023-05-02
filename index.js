@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
     <form action="/login">
     <button>Login</button>
     </form>
-    <form action="/memebers">
+    <form action="/members">
     <button>Members page</button>
     </form>
     <form action="/logout">
@@ -61,7 +61,7 @@ app.get("/", (req, res) => {
     </form>`);
 });
 
-app.get("/memebers", (req, res) => {
+app.get("/members", (req, res) => {
   if (!req.session.authenticated) {
     res.redirect("/");
     return;
@@ -199,7 +199,7 @@ app.post("/submitUser", async (req, res) => {
   req.session.authenticated = true;
   req.session.username = username;
 
-  var html = `Welcome!<br><a href="/memebers">Members Page</a>`;
+  var html = `Welcome!<br><a href="/members">Members Page</a>`;
   res.send(html);
 });
 
@@ -246,7 +246,7 @@ app.get("/loggedin", (req, res) => {
     res.redirect("/login");
   }
   var html = `
-    Successfully logged in.<br><a href="/memebers">Members Page</a>
+    Successfully logged in.<br><a href="/members">Members Page</a>
     <a href="/logout">Logout</a>`;
   res.send(html);
 });

@@ -56,9 +56,7 @@ app.get("/", (req, res) => {
     <form action="/members">
     <button>Members page</button>
     </form>
-    <form action="/logout">
-    <button>Logout</button>
-    </form>`);
+`);
 });
 
 app.get("/members", (req, res) => {

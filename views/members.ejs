@@ -1,11 +1,24 @@
 <%- include("templates/header") %>
 
-  <div class="container-fluid">
+  <div class="container">
     <h1 class="mb-3">Hello, <%= session.name %>
     </h1>
-    <img src="/<%= randomBlock %>" class="img-thumbnail mb-3" style="width: 250px;">
-    <br>
-    <a href="/logout" class="btn btn-primary">Logout</a>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+        <img src="/Dirt.png" class="img-thumbnail w-100">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+        <img src="/Stone.png" class="img-thumbnail w-100">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+        <img src="/Grass_Block.png" class="img-thumbnail w-100">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <a href="/logout" class="btn btn-primary">Logout</a>
+      </div>
+    </div>
   </div>
 
 

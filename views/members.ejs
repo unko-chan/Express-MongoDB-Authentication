@@ -1,0 +1,12 @@
+<%- include("templates/header") %>
+
+  <div class="container-fluid">
+    <h1 class="mb-3">Hello, <%= session.name %>
+    </h1>
+    <img src="/<%= randomBlock %>" class="img-thumbnail mb-3" style="width: 250px;">
+    <br>
+    <a href="/logout" class="btn btn-primary">Logout</a>
+  </div>
+
+
+  <%- include("templates/footer") %>

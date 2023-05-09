@@ -1,0 +1,19 @@
+<%- include("templates/header") %>
+<div class="container-fluid">
+  <% if (session.authenticated) { %>
+    <%- include("templates/loggedIn", {name: session.name}) %>
+  <% } else { %>
+    <h1 class="mb-3">Hello!</h1>
+    <form action="/createUser" class="mb-3">
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+    <form action="/login" class="mb-3">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  <% } %>
+  <form action="/members">
+    <button type="submit" class="btn btn-primary">Members page</button>
+  </form>
+</div>
+
+  <%- include("templates/footer") %>

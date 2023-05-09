@@ -1,0 +1,35 @@
+<%- include("templates/header") %>
+  <div class="container-fluid">
+    <h1 class="mb-3">Admin Page</h1>
+    <div class="row mb-2 font-weight-bold d-none d-md-flex">
+      <div class="col-md-3">Name</div>
+      <div class="col-md-3">Email</div>
+      <div class="col-md-2">Type</div>
+      <div class="col-md-4">Action</div>
+    </div>
+    <% users.forEach(user=> { %>
+      <div class="row mb-2 border-bottom">
+        <div class="col-md-3">
+          <strong class="d-md-none">Name: </strong>
+          <%= user.name %>
+        </div>
+        <div class="col-md-3">
+          <strong class="d-md-none">Email: </strong>
+          <%= user.email %>
+        </div>
+        <div class="col-md-2">
+          <strong class="d-md-none">Type: </strong>
+          <%= user.isAdmin ? "Admin" : "User" %>
+        </div>
+        <div class="col-md-4">
+          <% if (user.isAdmin) { %>
+            <a href="/demote/<%= user._id %>" class="btn btn-warning">Demote to User</a>
+            <% } else { %>
+              <a href="/promote/<%= user._id %>" class="btn btn-success">Promote to Admin</a>
+              <% } %>
+        </div>
+      </div>
+      <% }) %>
+  </div>
+
+  <%- include("templates/footer") %>

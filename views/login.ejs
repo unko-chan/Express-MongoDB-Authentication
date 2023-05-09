@@ -1,0 +1,20 @@
+<%- include("templates/header") %>
+  <div class="container-fluid">
+    <h1 class="mb-3">Log in</h1>
+    <form action='/loggingin' method='post'>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input name='email' type='email' class='form-control' id='email' aria-describedby='emailHelp'
+          placeholder='Enter email'>
+        <div id='emailHelp' class='form-text'>We'll never share your email with anyone else.</div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input name='password' type='password' class='form-control' id='password' placeholder='Password'>
+      </div>
+      <button type='submit' class='btn btn-primary'>Submit</button>
+    </form>
+  </div>
+
+
+  <%- include("templates/footer") %>

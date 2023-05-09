@@ -30,8 +30,6 @@ var { database } = include("databaseConnection");
 
 const userCollection = database.db(mongodb_database).collection("users");
 
-// await db.getCollection("users").updateOne({name: 'you'}, {$set: {user_type: 'user'}});
-
 app.use(express.urlencoded({ extended: false }));
 
 var mongoStore = MongoStore.create({
@@ -50,13 +48,13 @@ app.use(
   })
 );
 
-function isAdmin(req, res, next) {
+function user_type(req, res, next) {
   console.log(req.session);
   if (req.session.authenticated) {
-    if (req.session.isAdmin) {
+    if (req.session.user_type === "admin") {
       next();
     } else {
-      res.redirect("/error");
+      res.status(403).send("Error: You do not have permission to access this page.");
     }
   } else {
     res.redirect("/login");
@@ -202,7 +200,7 @@ app.post("/submitUser", async (req, res) => {
     name: name,
     email: email,
     password: hashedPassword,
-    isAdmin: false,
+    user_type: "user",
   });
   console.log("User has been inserted");
   req.session.authenticated = true;
@@ -225,7 +223,7 @@ app.post("/loggingin", async (req, res) => {
 
   const result = await userCollection
     .find({ email: email })
-    .project({ email: 1, name: 1, password: 1, isAdmin: 1, _id: 1 })
+    .project({ email: 1, name: 1, password: 1, user_type: 1, _id: 1 })
     .toArray();
 
   if (result.length != 1) {
@@ -238,7 +236,7 @@ app.post("/loggingin", async (req, res) => {
     req.session.authenticated = true;
     req.session.email = email;
     req.session.name = result[0].name;
-    req.session.isAdmin = result[0].isAdmin;
+    req.session.user_type = result[0].user_type;
     req.session.cookie.maxAge = expireTime;
 
     res.redirect("/loggedIn");
@@ -263,25 +261,25 @@ app.get("/logout", (req, res) => {
 
 app.use(express.static(__dirname + "/public"));
 
-app.get("/admin", isAdmin, async (req, res) => {
+app.get("/admin", user_type, async (req, res) => {
   const users = await userCollection.find().toArray();
   res.render("admin", { users });
 });
 
-app.get("/promote/:userId", isAdmin, async (req, res) => {
+app.get("/promote/:userId", user_type, async (req, res) => {
   const userId = req.params.userId;
   await userCollection.updateOne(
     { _id: new ObjectId(userId) },
-    { $set: { isAdmin: true } }
+    { $set: { user_type: "admin" } }
   );
   res.redirect("/admin");
 });
 
-app.get("/demote/:userId", isAdmin, async (req, res) => {
+app.get("/demote/:userId", user_type, async (req, res) => {
   const userId = req.params.userId;
   await userCollection.updateOne(
     { _id: new ObjectId(userId) },
-    { $set: { isAdmin: false } }
+    { $set: { user_type: "user" } }
   );
   res.redirect("/admin");
 });

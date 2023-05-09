@@ -1,10 +1,12 @@
 <%- include("templates/header") %>
-
+<div class="d-flex flex-column align-items-center justify-content-center">
   <h1>Error</h1>
-  <% if (missingFields.length > 0) { %>
-    <p>Please provide <%= missingFields.join(", ") %><%= missingFields.length > 1 ? "," : "" %> before submitting the form.</p>
-  <% } else { %>
-    <p>An unknown error occurred. Please try again later.</p>
-  <% } %>
-  <a href="/createUser">Go back to the registration page</a>
-<%- include("templates/footer") %>
+    <% if (missingFields.length> 0) { %>
+      <p>Please provide <%= missingFields.join(", ") %><%= missingFields.length > 1 ? " ," : "" %> before submitting the
+          form.</p>
+      <% } else { %>
+        <p>An unknown error occurred. Please try again later.</p>
+        <% } %>
+          <a href="/createUser">Go back to the registration page</a>
+  </div>
+  <%- include("templates/footer") %>

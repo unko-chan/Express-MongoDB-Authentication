@@ -1,5 +1,5 @@
 <%- include("templates/header") %>
-<div class="container-fluid">
+<div class="d-flex flex-column align-items-center justify-content-center">
   <% if (session.authenticated) { %>
     <%- include("templates/loggedIn", {name: session.name}) %>
   <% } else { %>
